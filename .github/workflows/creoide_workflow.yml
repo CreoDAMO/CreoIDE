@@ -1,0 +1,67 @@
+name: CreoIDE Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  CreoIDE-Analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CreoIDE
+        run: |
+          wget https://creoide.com/download/creoide-latest-linux.tar.gz
+          tar -xf creoide-latest-linux.tar.gz
+          mv creoide-latest-linux creoide
+          export PATH=$PATH:$PWD/creoide/bin
+      - name: Connect to GitHub
+        run: |
+          creoide auth github -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+      - name: Analyze Code
+        run: |
+          creoide analyze $GITHUB_WORKSPACE -p creoide_config.json
+      - name: Report Results
+        run: |
+          creoide report -f creoide_results.json
+
+  CreoIDE-Testing:
+    runs-on: ubuntu-latest
+    needs: CreoIDE-Analysis
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CreoIDE
+        run: |
+          wget https://creoide.com/download/creoide-latest-linux.tar.gz
+          tar -xf creoide-latest-linux.tar.gz
+          mv creoide-latest-linux creoide
+          export PATH=$PATH:$PWD/creoide/bin
+      - name: Connect to GitHub
+        run: |
+          creoide auth github -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+      - name: Run Tests
+        run: |
+          creoide test $GITHUB_WORKSPACE -t creoide_test_config.json
+      - name: Report Results
+        run: |
+          creoide report -f creoide_test_results.json
+
+  CreoIDE-Deployment:
+    runs-on: ubuntu-latest
+    needs: CreoIDE-Testing
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CreoIDE
+        run: |
+          wget https://creoide.com/download/creoide-latest-linux.tar.gz
+          tar -xf creoide-latest-linux.tar.gz
+          mv creoide-latest-linux creoide
+          export PATH=$PATH:$PWD/creoide/bin
+      - name: Connect to GitHub
+        run: |
+          creoide auth github -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+      - name: Deploy to Production
+        run: |
+          creoide deploy $GITHUB_WORKSPACE -d creoide_deployment_config.json
