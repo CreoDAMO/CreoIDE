@@ -1,0 +1,17 @@
+{
+  "analysis": {
+    "modules": ["code_style", "security", "performance", "maintainability"],
+    "targets": ["src/", "test/"],
+    "options": {
+      "code_style": {
+        "rules": {
+          "indent": {"style": "spaces", "size": 2},
+          "quotes": {"style": "single"}
+        }
+      },
+      "security": {"level": "high"},
+      "performance": {"metrics": ["time_complexity", "memory_usage"]},
+      "maintainability": {"metrics": ["cyclomatic_complexity", "coupling", "cohesion"]}
+    }
+  }
+}
