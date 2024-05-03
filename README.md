@@ -36,15 +36,118 @@ Follow these steps to install Creo IDE:
 3. For macOS/Linux: Open the terminal and navigate to the directory where the downloaded file is located. Run the command `sh CreoIDESetup.sh` to start the installation process.
 4. Once the installation is complete, verify it by running the command `creoide --version` in the terminal. It should display the version number of the installed IDE.
 
-### Basic Commands
+To install CreoIDE from the GitHub repository on a Linux system, you can follow these steps:
 
-Here are some basic commands to get started with Creo IDE:
+1. **Open Terminal:**
+   - Access your terminal on Linux by pressing `Ctrl + Alt + T` or searching for "Terminal" in your applications.
 
-- Create a new project: Use the command `creoide create-project MyCreoProject` to create a new project with the given name.
-- Open a project: Use the command `creoide open MyCreoProject` to open an existing project with the given name.
-- Compile code: Use the command `creoide compile myscript.creo` to compile a CreoLang script file named `myscript.creo`.
-- Run scripts: Use the command `creoide run myscript.creo` to run a CreoLang script file named `myscript.creo`.
-- Access the standard library: Use the command `creoide library --list` to view a list of available libraries in CreoLang.
+2. **Install Git (if not already installed):**
+   - Update your package lists:
+     ```bash
+     sudo apt-get update
+     ```
+   - Install Git:
+     ```bash
+     sudo apt-get install git
+     ```
+
+3. **Clone the Repository:**
+   - Use the `git clone` command to clone the CreoIDE repository:
+     ```bash
+     git clone https://github.com/CreoDAMO/CreoIDE.git
+     ```
+
+4. **Navigate to the Repository Directory:**
+   - Change to the directory that contains the cloned repository:
+     ```bash
+     cd CreoIDE
+     ```
+
+5. **Run Installation Scripts or Commands:**
+   - If CreoIDE has an installation script or makefile, execute it as per the instructions provided in the repository's README or documentation.
+
+6. **Set Environment Variables (if needed):**
+   - If CreoIDE requires setting environment variables, configure them as instructed by the documentation.
+
+7. **Verify Installation:**
+   - Once installed, you can verify the installation by running a CreoIDE command, such as checking its version:
+     ```bash
+     creoide --version
+     ```
+
+Make sure to follow any additional instructions specific to CreoIDE that may be provided in the repository's documentation. If you encounter any issues or have questions about the installation process, feel free to ask for further assistance.
+
+### Commands
+
+```creo
+// Define a command to compile CreoLang code into an executable
+command compile(sourceFile: String, target: String) -> Bool {
+    // Logic to compile the source file into the target executable
+    // Return true if compilation is successful, false otherwise
+}
+
+// Define a command to run the compiled CreoLang executable
+command run(executableFile: String) {
+    // Logic to execute the compiled file
+}
+
+// Define a command to clean up generated files
+command clean(projectName: String) {
+    // Logic to remove compiled files and other artifacts for the specified project
+}
+
+// Define a command to create a new CreoLang project
+command createProject(projectName: String) {
+    // Logic to set up a new project with the given name
+}
+
+// Define a command to add a new file to the CreoLang project
+command addFile(projectName: String, fileName: String, fileContent: String) {
+    // Logic to add a new file with the provided content to the specified project
+}
+
+// Define a command to build the entire CreoLang project
+command buildProject(projectName: String, configuration: String) -> Bool {
+    // Logic to build all files in the project with the specified configuration
+    // Return true if the build is successful, false otherwise
+}
+
+// Define a command to test the CreoLang project
+command testProject(projectName: String, testSuite: String) -> Bool {
+    // Logic to run tests for the project using the specified test suite
+    // Return true if tests pass, false otherwise
+}
+
+// Define a command to deploy the CreoLang project
+command deployProject(projectName: String, environment: String, deployOptions: Map<String, String>) {
+    // Logic to deploy the project to the desired environment with the specified options
+}
+
+// Main function to demonstrate the usage of commands
+func main() {
+    let projectName = "MyCreoProject"
+    createProject(projectName)
+    addFile(projectName, "main.creo", "/* CreoLang code */")
+    
+    let compileSuccess = compile("main.creo", "main")
+    if compileSuccess {
+        run("main")
+    }
+    
+    let buildSuccess = buildProject(projectName, "release")
+    if buildSuccess {
+        let testSuccess = testProject(projectName, "unit-tests")
+        if testSuccess {
+            let deployOptions = {"target": "server", "mode": "auto-scaling"}
+            deployProject(projectName, "production", deployOptions)
+        }
+    }
+    
+    clean(projectName)
+}
+
+main()
+```
 
 ## Project Structure
 
