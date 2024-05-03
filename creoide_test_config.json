@@ -1,0 +1,9 @@
+{
+  "testing": {
+    "framework": "pytest",
+    "test_cases": ["test_unit.py", "test_integration.py"],
+    "options": {
+      "pytest": {"verbose": true, "coverage": true}
+    }
+  }
+}
