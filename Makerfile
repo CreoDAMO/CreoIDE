@@ -1,0 +1,22 @@
+# Makefile for CreoIDE project
+
+# CreoLang compiler
+CREOC = creoc
+
+# Source files
+SRCS = $(wildcard *.creo)
+
+# Target executable
+TARGET = CreoIDE
+
+# Default target
+all: $(TARGET)
+
+# Compile source files
+$(TARGET): $(SRCS)
+	$(CREOC) -o $@ $^
+
+# Clean up compiled files
+clean:
+	rm -f $(TARGET)
+ 
