@@ -1,16 +1,28 @@
 {
   "deployment": {
     "target": "production",
-    "environment": "azure",
-    "options": {
-      "azure": {
-        "subscription_id": "YOUR_AZURE_SUBSCRIPTION_ID",
-        "tenant_id": "YOUR_AZURE_TENANT_ID",
-        "client_id": "YOUR_AZURE_CLIENT_ID",
-        "client_secret": "YOUR_AZURE_CLIENT_SECRET",
-        "resource_group": "YOUR_AZURE_RESOURCE_GROUP",
-        "app_service_plan": "YOUR_AZURE_APP_SERVICE_PLAN",
-        "app_name": "YOUR_AZURE_APP_NAME"
+    "environments": {
+      "staging": {
+        "azure": {
+          "subscription_id": "YOUR_AZURE_STAGING_SUBSCRIPTION_ID",
+          "tenant_id": "YOUR_AZURE_STAGING_TENANT_ID",
+          "client_id": "YOUR_AZURE_STAGING_CLIENT_ID",
+          "client_secret": "YOUR_AZURE_STAGING_CLIENT_SECRET",
+          "resource_group": "YOUR_AZURE_STAGING_RESOURCE_GROUP",
+          "app_service_plan": "YOUR_AZURE_STAGING_APP_SERVICE_PLAN",
+          "app_name": "YOUR_AZURE_STAGING_APP_NAME"
+        }
+      },
+      "production": {
+        "azure": {
+          "subscription_id": "YOUR_AZURE_PRODUCTION_SUBSCRIPTION_ID",
+          "tenant_id": "YOUR_AZURE_PRODUCTION_TENANT_ID",
+          "client_id": "YOUR_AZURE_PRODUCTION_CLIENT_ID",
+          "client_secret": "YOUR_AZURE_PRODUCTION_CLIENT_SECRET",
+          "resource_group": "YOUR_AZURE_PRODUCTION_RESOURCE_GROUP",
+          "app_service_plan": "YOUR_AZURE_PRODUCTION_APP_SERVICE_PLAN",
+          "app_name": "YOUR_AZURE_PRODUCTION_APP_NAME"
+        }
       }
     }
   }
