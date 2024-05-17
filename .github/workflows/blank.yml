@@ -10,40 +10,63 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-      # Install CreoIDE (assuming you have a script or package available)
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
       - name: Install CreoIDE
         run: |
-          # Replace the following line with the command to install CreoIDE
-          # sudo apt-get install -y creoide
-      # Authenticate CreoIDE with GitHub
+          # Command to install CreoIDE (example)
+          sudo apt-get update
+          sudo apt-get install -y creoide
+
       - name: Authenticate CreoIDE with GitHub
+        env:
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Replace the following line with the command to authenticate CreoIDE
-          # creoide auth github -u ${{ secrets.GITHUB_USERNAME }} -p ${{ secrets.GITHUB_TOKEN }}
-      # Generate and install dependencies package
-      - name: Generate and Install Dependencies
-        run: |
-          pip install -r requirements.txt
-      # Analyze code using CreoIDE
+          # Command to authenticate CreoIDE with GitHub (example)
+          creoide auth github -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+
       - name: Analyze Code with CreoIDE
         run: |
-          # Replace the following line with the command to analyze code
-          # creoide analyze
-      # Test code using CreoIDE
+          # Command to analyze code with CreoIDE (example)
+          creoide analyze
+
       - name: Test Code with CreoIDE
         run: |
-          # Replace the following line with the command to test code
-          # creoide test
-      # Deploy code using CreoIDE
+          # Command to test code with CreoIDE (example)
+          creoide test
+
       - name: Deploy Code with CreoIDE
         run: |
-          # Replace the following line with the command to deploy code
-          # creoide deploy
+          # Command to deploy code with CreoIDE (example)
+          creoide deploy
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results/
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          # Command to send a notification on failure (example)
+          echo "Build failed. Sending notification..."
+          # Add your notification command here
