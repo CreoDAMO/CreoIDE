@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "configurations": [
+    {
+      "name": "Run CreoLang Project",
+      "type": "creolang",
+      "request": "launch",
+      "mainFile": "src/main.creo",
+      "args": [],
+      "env": {
+        "NODE_ENV": "development",
+        "PYTHONPATH": "/usr/local/lib/python3.8/site-packages"
+      },
+      "build": {
+        "preBuild": ["npm install", "pip install -r requirements.txt"],
+        "postBuild": ["echo Build completed"]
+      },
+      "tasks": [
+        {
+          "label": "Compile CreoLang Code",
+          "type": "shell",
+          "command": "creo compile src/main.creo -o build/main",
+          "problemMatcher": ["$creo"]
+        },
+        {
+          "label": "Run CreoLang Executable",
+          "type": "shell",
+          "command": "creo run build/main",
+          "problemMatcher": []
+        }
+      ]
+    }
+  ]
+}
