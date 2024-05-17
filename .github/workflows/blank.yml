@@ -25,32 +25,33 @@ jobs:
 
       - name: Install CreoIDE
         run: |
-          # Command to install CreoIDE (example)
           sudo apt-get update
-          sudo apt-get install -y creoide
+          # Add the CreoIDE repository and its GPG key, then install the package
+          # Example: sudo add-apt-repository 'deb [arch=amd64] http://example.com/creoide-repo bionic main'
+          # sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABCDEFGH
+          # sudo apt-get update
+          # sudo apt-get install -y creoide
+          
+          # Alternatively, if CreoIDE provides a downloadable package:
+          # wget http://example.com/creoide.deb
+          # sudo dpkg -i creoide.deb
+          # sudo apt-get install -f
 
       - name: Authenticate CreoIDE with GitHub
         env:
           GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Command to authenticate CreoIDE with GitHub (example)
           creoide auth github -u $GITHUB_USERNAME -p $GITHUB_TOKEN
 
       - name: Analyze Code with CreoIDE
-        run: |
-          # Command to analyze code with CreoIDE (example)
-          creoide analyze
+        run: creoide analyze
 
       - name: Test Code with CreoIDE
-        run: |
-          # Command to test code with CreoIDE (example)
-          creoide test
+        run: creoide test
 
       - name: Deploy Code with CreoIDE
-        run: |
-          # Command to deploy code with CreoIDE (example)
-          creoide deploy
+        run: creoide deploy
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v3
@@ -67,6 +68,5 @@ jobs:
       - name: Notify on Failure
         if: failure()
         run: |
-          # Command to send a notification on failure (example)
           echo "Build failed. Sending notification..."
           # Add your notification command here
