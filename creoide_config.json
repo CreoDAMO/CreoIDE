@@ -1,17 +1,101 @@
 {
   "analysis": {
-    "modules": ["code_style", "security", "performance", "maintainability"],
-    "targets": ["src/", "test/"],
+    "modules": [
+      "code_style",
+      "security",
+      "performance",
+      "maintainability",
+      "accessibility",
+      "compatibility",
+      "documentation"
+    ],
+    "targets": {
+      "src": {
+        "include": ["**/*.c", "**/*.h"],
+        "exclude": ["**/external/**"]
+      },
+      "test": {
+        "include": ["**/*.c", "**/*.h"],
+        "exclude": []
+      }
+    },
     "options": {
       "code_style": {
         "rules": {
-          "indent": {"style": "spaces", "size": 2},
-          "quotes": {"style": "single"}
+          "indent": {
+            "style": "spaces",
+            "size": 2
+          },
+          "quotes": {
+            "style": "single"
+          },
+          "max_line_length": 80,
+          "trailing_comma": "never",
+          "semicolon": "always"
         }
       },
-      "security": {"level": "high"},
-      "performance": {"metrics": ["time_complexity", "memory_usage"]},
-      "maintainability": {"metrics": ["cyclomatic_complexity", "coupling", "cohesion"]}
+      "security": {
+        "level": "high",
+        "checks": [
+          "buffer_overflows",
+          "sql_injection",
+          "xss",
+          "csrf"
+        ]
+      },
+      "performance": {
+        "metrics": [
+          "time_complexity",
+          "memory_usage",
+          "cpu_usage",
+          "io_operations"
+        ],
+        "thresholds": {
+          "max_time_complexity": "O(n^2)",
+          "max_memory_usage": "100MB"
+        }
+      },
+      "maintainability": {
+        "metrics": [
+          "cyclomatic_complexity",
+          "coupling",
+          "cohesion",
+          "lines_of_code"
+        ],
+        "thresholds": {
+          "max_cyclomatic_complexity": 10,
+          "max_coupling": 5,
+          "min_cohesion": 0.5
+        }
+      },
+      "accessibility": {
+        "checks": [
+          "keyboard_navigation",
+          "color_contrast",
+          "screen_reader_support"
+        ]
+      },
+      "compatibility": {
+        "browsers": [
+          "chrome_latest",
+          "firefox_latest",
+          "safari_latest",
+          "edge_latest"
+        ],
+        "platforms": [
+          "windows",
+          "macos",
+          "linux"
+        ]
+      },
+      "documentation": {
+        "formats": ["markdown", "doxygen"],
+        "checks": [
+          "missing_docs",
+          "outdated_docs",
+          "broken_links"
+        ]
+      }
     }
   }
 }
