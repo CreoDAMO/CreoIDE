@@ -1,9 +1,51 @@
 {
   "testing": {
-    "framework": "pytest",
-    "test_cases": ["test_unit.py", "test_integration.py"],
+    "frameworks": ["pytest", "unittest", "nose"],
+    "test_cases": {
+      "unit": ["tests/test_unit.py"],
+      "integration": ["tests/test_integration.py"],
+      "e2e": ["tests/test_e2e.py"]
+    },
     "options": {
-      "pytest": {"verbose": true, "coverage": true}
+      "pytest": {
+        "verbose": true,
+        "coverage": {
+          "enabled": true,
+          "report": "html",
+          "threshold": 80
+        },
+        "parallel": true,
+        "max_workers": 4
+      },
+      "unittest": {
+        "verbose": 2,
+        "failfast": true,
+        "buffer": true
+      },
+      "nose": {
+        "verbosity": 2,
+        "with-coverage": true,
+        "cover-erase": true,
+        "cover-html": true
+      }
+    },
+    "coverage": {
+      "enabled": true,
+      "thresholds": {
+        "statements": 85,
+        "branches": 75,
+        "functions": 90,
+        "lines": 85
+      },
+      "report": "xml"
+    },
+    "environment": {
+      "variables": {
+        "ENV": "test",
+        "DB_HOST": "localhost",
+        "DB_USER": "test_user",
+        "DB_PASSWORD": "test_password"
+      }
     }
   }
 }
