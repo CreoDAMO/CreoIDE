@@ -1,4 +1,5 @@
 CC = gcc
+CREO_COMPILER = creo-compiler
 CFLAGS = -Wall -Werror
 DEBUG_FLAGS = -g
 RELEASE_FLAGS = -O3
@@ -34,9 +35,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.creo
 	@mkdir -p $(OBJ_DIR)
-	# Add the command to compile CreoLang files to object files
-	# Example: creo-compiler $(CFLAGS) -c $< -o $@
-	creo-compiler $(CFLAGS) -c $< -o $@
+	$(CREO_COMPILER) $(CFLAGS) -MMD -c $< -o $@
 
 -include $(DEP_FILES)
 
@@ -47,6 +46,4 @@ run: all
 	./$(BIN_DIR)/$(TARGET)
 
 test: all
-	# Add your test commands here
-	# Example: ./$(BIN_DIR)/$(TARGET) --test
 	./$(BIN_DIR)/$(TARGET) --test
