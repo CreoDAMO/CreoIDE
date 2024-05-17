@@ -1,0 +1,83 @@
+// CreoCLI Module with Enhanced Features and Logging
+
+module CreoCLI {
+    // Importing necessary modules
+    UseModules: ArgParser, CreoCompiler, CreoShell, VersionManager, HelpManager, FileManager, Logger, ConfigurationManager
+
+    // Main action for handling CLI commands
+    Action Main {
+        Args <- ArgParser.Parse()
+        if not Args.IsValid() {
+            Logger.LogError("Invalid command-line arguments")
+            HelpManager.ShowErrorMessage("Invalid arguments")
+            return
+        }
+
+        Switch Args.Command {
+            Case 'compile':
+                if Args.FileIsValid() {
+                    Logger.LogInfo("Compiling file: \(Args.File)")
+                    CreoCompiler.Compile(Args.File)
+                } else {
+                    Logger.LogError("Invalid file path for compilation")
+                    HelpManager.ShowErrorMessage("Invalid file path")
+                }
+
+            Case 'run':
+                if FileManager.FileExists(Args.File) {
+                    Logger.LogInfo("Executing file: \(Args.File)")
+                    FileManager.ExecuteFile(Args.File)
+                } else {
+                    Logger.LogError("File not found for execution")
+                    HelpManager.ShowErrorMessage("File not found")
+                }
+
+            Case 'shell':
+                Logger.LogInfo("Starting interactive shell")
+                CreoShell.StartInteractiveMode()
+
+            Case 'version':
+                Logger.LogInfo("Displaying version information")
+                VersionManager.DisplayVersion()
+
+            Case 'help':
+                Logger.LogInfo("Displaying help for command: \(Args.Command)")
+                HelpManager.ShowHelp(Args.Command)
+
+            Case 'config':
+                Logger.LogInfo("Configuring with options: \(Args.Options)")
+                ConfigurationManager.Configure(Args.Options)
+
+            Default:
+                Logger.LogWarning("Unknown command: \(Args.Command)")
+                HelpManager.ShowDefaultMessage()
+        }
+    }
+
+    // Configuration Management Logic
+    Action ConfigurationManager {
+        func Configure(options: Map<String, Any>) {
+            // Logic to handle various configuration options
+            // ...
+            Logger.LogInfo("Configuration updated with options: \(options)")
+        }
+    }
+
+    // Logger Module for detailed logging
+    module Logger {
+        func LogInfo(message: String) {
+            // Logic to log informational messages
+            // ...
+        }
+
+        func LogError(message: String) {
+            // Logic to log error messages
+            // ...
+        }
+
+        func LogWarning(message: String) {
+            // Logic to log warning messages
+            // ...
+        }
+    }
+        }
