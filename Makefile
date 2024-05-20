@@ -1,13 +1,8 @@
-# Makefile for CreoIDE
-
-# Compiler and flags for C
+# Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Werror
 DEBUG_FLAGS = -g
 RELEASE_FLAGS = -O3
-
-# CreoLang compiler
-CREO_CC = creo-compiler
 
 # Directories
 SRC_DIR = src
@@ -15,53 +10,41 @@ OBJ_DIR = obj
 BIN_DIR = bin
 TARGET = CreoIDE
 
-# Source and Object files for C
-C_SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-C_OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(C_SRC_FILES))
-C_DEP_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.d, $(C_SRC_FILES))
-
-# CreoLang source files
-CREO_SRC_FILES = $(wildcard $(SRC_DIR)/*.creo)
-CREO_OBJ_FILES = $(patsubst $(SRC_DIR)/%.creo, $(BIN_DIR)/%, $(CREO_SRC_FILES))
+# Source and Object files
+SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+DEP_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.d, $(SRC_FILES))
 
 # Main commands
-.PHONY: all clean debug release run compile-c compile-creo test setup
+.PHONY: all clean debug release run compile-creo test
 
 all: release
 
-setup:
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(BIN_DIR)
-
 debug: CFLAGS += $(DEBUG_FLAGS)
-debug: compile-c compile-creo
+debug: $(BIN_DIR)/$(TARGET)
 
 release: CFLAGS += $(RELEASE_FLAGS)
-release: compile-c compile-creo
+release: $(BIN_DIR)/$(TARGET)
 
-compile-c: $(C_OBJ_FILES)
-	$(CC) $(CFLAGS) $^ -o $(BIN_DIR)/$(TARGET)
+$(BIN_DIR)/$(TARGET): $(OBJ_FILES)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $(CFLAGS) $^ -o $@
 
-compile-creo: $(CREO_OBJ_FILES)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | setup
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -MMD -c $< -o $@
 
-$(BIN_DIR)/%: $(SRC_DIR)/%.creo | setup
-	$(CREO_CC) $< -o $@
-
--include $(C_DEP_FILES)
+-include $(DEP_FILES)
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
 run: all
-	@echo "Running CreoIDE..."
-	@./$(BIN_DIR)/$(TARGET) || echo "Run CreoLang output instead"
-	@for creo_output in $(CREO_OBJ_FILES); do \
-		echo "Running $$creo_output"; \
-		./$$creo_output; \
-	done
+	./$(BIN_DIR)/$(TARGET)
+
+# New command to compile CreoLang files
+compile-creo:
+	creo-compiler $(SRC_DIR)/CreoLang/CreoLang.creo -o $(BIN_DIR)/CreoLang
 
 test: $(BIN_DIR)/$(TARGET)
 	./$(BIN_DIR)/$(TARGET) --test
