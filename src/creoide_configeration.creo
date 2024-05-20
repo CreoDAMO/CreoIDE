@@ -1,5 +1,3 @@
-// CreoIDE Configuration
-
 class CreoIDE {
     var languages: [String]
     var webDevelopment: WebDevelopmentModule
@@ -15,12 +13,12 @@ class CreoIDE {
 
     // Constructor to initialize CreoIDE with all features
     construct() {
-        this.languages = ["CreoLang", "Python", "Java", "C++", "JavaScript", "Rust", "Swift", ...]
+        this.languages = ["CreoLang", "Python", "Java", "C++", "JavaScript", "Rust", "Swift"]
         this.webDevelopment = new WebDevelopmentModule(
             HTML_Editor: true,
             CSS_Editor: true,
             JavaScript_Editor: true,
-            Frameworks: ["React", "Vue.js", "Angular", "Svelte", ...],
+            Frameworks: ["React", "Vue.js", "Angular", "Svelte"],
             LivePreview: true,
             CodeHotReloading: true
         )
@@ -35,13 +33,13 @@ class CreoIDE {
             Python_Support: true,
             JupyterNotebookIntegration: true,
             DataVisualizationTools: true,
-            MLFrameworks: ["TensorFlow", "PyTorch", "Keras", ...],
+            MLFrameworks: ["TensorFlow", "PyTorch", "Keras"],
             GPUAccelerationSupport: true
         )
         this.mobileDevelopment = new MobileDevelopmentModule(
             iOS_Support: true,
             Android_Support: true,
-            CrossPlatformFrameworks: ["Flutter", "React Native", "Xamarin", ...],
+            CrossPlatformFrameworks: ["Flutter", "React Native", "Xamarin"],
             MobileSimulator: true,
             MobileDebugging: true
         )
@@ -66,7 +64,7 @@ class CreoIDE {
             MemoryLeakDetection: true,
             CodeOptimizationHints: true
         )
-        this.multilingualSupport = ["English", "Spanish", "Mandarin", "French", "German", ...]
+        this.multilingualSupport = ["English", "Spanish", "Mandarin", "French", "German"]
         this.customization = new CustomizationModule(
             Themes: true,
             KeyBindings: true,
