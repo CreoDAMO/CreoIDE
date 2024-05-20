@@ -1,0 +1,97 @@
+// File: src/security/biometricAuthentication.creo
+
+class BiometricData {
+    var fingerprintData: String
+    var facialRecognitionData: String
+    var irisScanData: String
+
+    // Constructor to initialize BiometricData
+    construct(fingerprintData: String, facialRecognitionData: String, irisScanData: String) {
+        this.fingerprintData = fingerprintData
+        this.facialRecognitionData = facialRecognitionData
+        this.irisScanData = irisScanData
+    }
+}
+
+class User {
+    var userId: String
+    var biometricData: BiometricData
+
+    // Constructor to initialize User
+    construct(userId: String, biometricData: BiometricData) {
+        this.userId = userId
+        this.biometricData = biometricData
+    }
+}
+
+class AuthenticationManager {
+    var registeredUsers: List<User>
+
+    // Constructor to initialize AuthenticationManager
+    construct() {
+        this.registeredUsers = new List<User>()
+        println("Authentication Manager initialized")
+    }
+
+    // Method to register a new user
+    func registerUser(user: User) {
+        this.registeredUsers.add(user)
+        println("User registered: \(user.userId)")
+    }
+
+    // Method to authenticate a user based on biometric data
+    func authenticateUser(inputBiometricData: BiometricData) -> Bool {
+        for user in this.registeredUsers {
+            if verifyBiometricData(user.biometricData, inputBiometricData) {
+                println("Authentication successful for user: \(user.userId)")
+                return true
+            }
+        }
+        println("Authentication failed")
+        return false
+    }
+
+    // Method to verify biometric data
+    func verifyBiometricData(storedData: BiometricData, inputData: BiometricData) -> Bool {
+        // Simulate biometric data verification logic
+        return storedData.fingerprintData == inputData.fingerprintData &&
+               storedData.facialRecognitionData == inputData.facialRecognitionData &&
+               storedData.irisScanData == inputData.irisScanData
+    }
+}
+
+func enableBiometricAuthentication() {
+    // Logic to implement biometric-based security measures
+    println("Enabling biometric authentication...")
+
+    // Simulate capturing biometric data from a user
+    var capturedBiometricData = captureBiometricData()
+    println("Captured Biometric Data: \(capturedBiometricData)")
+
+    // Initialize Authentication Manager
+    var authManager = new AuthenticationManager()
+
+    // Register a sample user
+    var sampleBiometricData = new BiometricData("fingerprint123", "face123", "iris123")
+    var sampleUser = new User("user1", sampleBiometricData)
+    authManager.registerUser(sampleUser)
+
+    // Authenticate using captured biometric data
+    var authenticationResult = authManager.authenticateUser(capturedBiometricData)
+    println("Authentication Result: \(authenticationResult)")
+}
+
+func captureBiometricData() -> BiometricData {
+    // Simulate capturing biometric data
+    return new BiometricData("fingerprint123", "face123", "iris123")
+}
+
+// Main execution for demonstration
+func main() {
+    println("Starting Biometric Authentication...")
+    enableBiometricAuthentication()
+    println("Biometric Authentication completed")
+}
+
+// Entry point
+main()
