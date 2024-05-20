@@ -1,0 +1,110 @@
+// File: src/carbonCalculator/mod.creo
+
+class DetailedUserData {
+    var transportation: TransportationData
+    var energyConsumption: EnergyConsumptionData
+    var dietaryHabits: DietaryHabitsData
+    var wasteProduction: WasteProductionData
+    var otherFactors: Map<String, Any>
+
+    // Constructor to initialize DetailedUserData
+    construct(transportation: TransportationData, energyConsumption: EnergyConsumptionData, dietaryHabits: DietaryHabitsData, wasteProduction: WasteProductionData, otherFactors: Map<String, Any>) {
+        this.transportation = transportation
+        this.energyConsumption = energyConsumption
+        this.dietaryHabits = dietaryHabits
+        this.wasteProduction = wasteProduction
+        this.otherFactors = otherFactors
+    }
+}
+
+class TransportationData {
+    var carMileage: Float
+    var publicTransitUsage: Float
+    var flights: Int
+
+    // Constructor to initialize TransportationData
+    construct(carMileage: Float, publicTransitUsage: Float, flights: Int) {
+        this.carMileage = carMileage
+        this.publicTransitUsage = publicTransitUsage
+        this.flights = flights
+    }
+}
+
+class EnergyConsumptionData {
+    var electricityUsage: Float
+    var heatingUsage: Float
+    var renewableEnergyPercentage: Float
+
+    // Constructor to initialize EnergyConsumptionData
+    construct(electricityUsage: Float, heatingUsage: Float, renewableEnergyPercentage: Float) {
+        this.electricityUsage = electricityUsage
+        this.heatingUsage = heatingUsage
+        this.renewableEnergyPercentage = renewableEnergyPercentage
+    }
+}
+
+class DietaryHabitsData {
+    var meatConsumption: Float
+    var dairyConsumption: Float
+    var plantBasedConsumption: Float
+
+    // Constructor to initialize DietaryHabitsData
+    construct(meatConsumption: Float, dairyConsumption: Float, plantBasedConsumption: Float) {
+        this.meatConsumption = meatConsumption
+        this.dairyConsumption = dairyConsumption
+        this.plantBasedConsumption = plantBasedConsumption
+    }
+}
+
+class WasteProductionData {
+    var wasteRecycled: Float
+    var wasteSentToLandfill: Float
+
+    // Constructor to initialize WasteProductionData
+    construct(wasteRecycled: Float, wasteSentToLandfill: Float) {
+        this.wasteRecycled = wasteRecycled
+        this.wasteSentToLandfill = wasteSentToLandfill
+    }
+}
+
+class CarbonFootprint {
+    var totalEmissions: Float
+
+    // Constructor to initialize CarbonFootprint
+    construct(totalEmissions: Float) {
+        this.totalEmissions = totalEmissions
+    }
+}
+
+func calculateDetailedCarbonFootprint(userData: DetailedUserData) -> CarbonFootprint {
+    var transportationImpact = userData.transportation.carMileage * 0.24 + userData.transportation.publicTransitUsage * 0.05 + userData.transportation.flights * 0.1
+    var energyImpact = userData.energyConsumption.electricityUsage * 0.233 + userData.energyConsumption.heatingUsage * 0.30 - userData.energyConsumption.renewableEnergyPercentage * 0.1
+    var dietaryImpact = userData.dietaryHabits.meatConsumption * 2.5 + userData.dietaryHabits.dairyConsumption * 1.8 + userData.dietaryHabits.plantBasedConsumption * 0.5
+    var wasteImpact = userData.wasteProduction.wasteRecycled * 0.1 + userData.wasteProduction.wasteSentToLandfill * 0.3
+    var otherImpact = 0.0
+
+    for factor in userData.otherFactors {
+        otherImpact += factor.value
+    }
+
+    var totalEmissions = transportationImpact + energyImpact + dietaryImpact + wasteImpact + otherImpact
+
+    return new CarbonFootprint(totalEmissions)
+}
+
+// Example usage
+func main() {
+    var transportationData = new TransportationData(12000, 500, 2)
+    var energyConsumptionData = new EnergyConsumptionData(4000, 2000, 20)
+    var dietaryHabitsData = new DietaryHabitsData(50, 30, 20)
+    var wasteProductionData = new WasteProductionData(300, 700)
+    var otherFactors = {"shopping": 1.5, "services": 2.0}
+
+    var detailedUserData = new DetailedUserData(transportationData, energyConsumptionData, dietaryHabitsData, wasteProductionData, otherFactors)
+    var carbonFootprint = calculateDetailedCarbonFootprint(detailedUserData)
+
+    println("Total Carbon Footprint: \(carbonFootprint.totalEmissions) tons of CO2e")
+}
+
+// Entry point
+main()
