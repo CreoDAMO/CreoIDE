@@ -68,16 +68,19 @@ module CreoCLI {
         func LogInfo(message: String) {
             // Logic to log informational messages
             // ...
+            print("[INFO] \(message)")
         }
 
         func LogError(message: String) {
             // Logic to log error messages
             // ...
+            print("[ERROR] \(message)")
         }
 
         func LogWarning(message: String) {
             // Logic to log warning messages
             // ...
+            print("[WARNING] \(message)")
         }
     }
-        }
+}
