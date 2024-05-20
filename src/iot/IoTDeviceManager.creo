@@ -1,0 +1,120 @@
+// File: src/iot/IoTDeviceManager.creo
+
+// Using CreoLang Modules for IoT Operations
+Use IoTController from CreoLang.IoT;
+Use DataCollector from CreoLang.DataCollection;
+Use FirmwareUpdater from CreoLang.FirmwareManagement;
+Use SecurityModule from CreoLang.Security;
+Use DeviceHealthMonitor from CreoLang.HealthMonitoring;
+Use NetworkOptimizer from CreoLang.NetworkOptimization;
+Use AnalyticsEngine from CreoLang.Analytics;
+
+// IoTDeviceManager Class with Extended Functionality
+class IoTDeviceManager {
+    controller: IoTController
+    dataCollector: DataCollector
+    firmwareUpdater: FirmwareUpdater
+    security: SecurityModule
+    healthMonitor: DeviceHealthMonitor
+    networkOptimizer: NetworkOptimizer
+    analytics: AnalyticsEngine
+    devices: List[IoTDevice]
+
+    // Constructor to initialize all components
+    construct() {
+        self.controller = new IoTController()
+        self.dataCollector = new DataCollector()
+        self.firmwareUpdater = new FirmwareUpdater()
+        self.security = new SecurityModule()
+        self.healthMonitor = new DeviceHealthMonitor()
+        self.networkOptimizer = new NetworkOptimizer()
+        self.analytics = new AnalyticsEngine()
+        self.devices = []
+        println("IoTDeviceManager initialized with necessary modules")
+    }
+
+    // Method to add a new device
+    method addDevice(device: IoTDevice) {
+        println("Adding device: \(device.id)")
+        self.devices.append(device)
+        self.controller.registerDevice(device)
+        self.healthMonitor.addDevice(device)
+    }
+
+    // Method to collect and analyze data from devices
+    method collectAndAnalyzeData() {
+        println("Collecting and analyzing data from devices")
+        for device in self.devices {
+            let data = self.dataCollector.collectDataFrom(device)
+            let analysis = self.analytics.analyze(data)
+            println("Data Analysis for \(device.id): \(analysis)")
+        }
+    }
+
+    // Method to update firmware of a specific device
+    method updateDeviceFirmware(deviceId: String, firmwareVersion: String) {
+        let device = self.devices.find(device => device.id == deviceId)
+        if device != nil {
+            println("Updating firmware for device: \(deviceId) to version: \(firmwareVersion)")
+            self.firmwareUpdater.update(device, firmwareVersion)
+            self.security.enforceLatestSecurityStandards(device)
+        } else {
+            println("Device not found: \(deviceId)")
+        }
+    }
+
+    // Method to optimize network performance for all devices
+    method optimizeNetworkPerformance() {
+        println("Optimizing network performance for devices")
+        self.networkOptimizer.optimizeFor(self.devices)
+    }
+
+    // Method to report the health status of all devices
+    method reportDeviceHealth() {
+        println("Generating health reports for devices")
+        let healthReports = self.healthMonitor.generateReports(self.devices)
+        println("Device Health Reports: \(healthReports)")
+    }
+}
+
+// IoTDevice Class with Enhanced Capabilities
+class IoTDevice {
+    id: String
+    firmwareVersion: String
+
+    // Constructor to initialize device properties
+    construct(id: String, firmwareVersion: String) {
+        self.id = id
+        self.firmwareVersion = firmwareVersion
+        println("IoTDevice initialized with ID: \(id) and Firmware Version: \(firmwareVersion)")
+    }
+
+    // Method to collect data from the device
+    method collectData() -> String {
+        println("Collecting data from device: \(self.id)")
+        // Advanced logic to collect data from sensors
+        return "sample data from \(self.id)"
+    }
+
+    // Method to update the firmware of the device
+    method updateFirmware(version: String) {
+        self.firmwareVersion = version
+        println("Firmware updated to version: \(version) for device: \(self.id)")
+        // Enhanced firmware update logic
+    }
+}
+
+// Main Execution
+func main() {
+    println("Starting IoT Device Management System...")
+    let manager = new IoTDeviceManager()
+    manager.addDevice(new IoTDevice("device1", "1.0"))
+
+    manager.collectAndAnalyzeData()
+    manager.updateDeviceFirmware("device1", "1.1")
+    manager.optimizeNetworkPerformance()
+    manager.reportDeviceHealth()
+    println("IoT Device Management System operations completed")
+}
+
+main()
