@@ -44,7 +44,8 @@ run: all
 
 # New command to compile CreoLang files
 compile-creo:
-	bin/creo-compiler src/CreoLang/CreoLang.creo bin/CreoLang
+	@mkdir -p $(BIN_DIR)
+	./scripts/creo-compiler.sh $(SRC_DIR)/CreoLang/CreoLang.creo $(BIN_DIR)/CreoLang
 
 test: $(BIN_DIR)/$(TARGET)
 	./$(BIN_DIR)/$(TARGET) --test

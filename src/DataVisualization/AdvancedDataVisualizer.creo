@@ -1,0 +1,32 @@
+// Using CreoLang modules for advanced data visualization
+Use DataVisualization from CreoLang.DataVis;
+Use ChartingTools from CreoLang.Charts;
+Use DataProcessing from CreoLang.DataProcessing;
+
+// Advanced Data Visualization Class
+class AdvancedDataVisualizer {
+    dataVis: DataVisualization
+    chartTools: ChartingTools
+    dataProcessor: DataProcessing
+
+    constructor() {
+        this.dataVis = new DataVisualization()
+        this.chartTools = new ChartingTools()
+        this.dataProcessor = new DataProcessing()
+    }
+
+    func visualizeData(dataSet: DataSet) {
+        let processedData = this.dataProcessor.process(dataSet)
+        let chart = this.chartTools.createChart(processedData)
+        this.dataVis.display(chart)
+    }
+}
+
+// Example usage of AdvancedDataVisualizer
+func main() {
+    let visualizer = new AdvancedDataVisualizer()
+    let data = DataSet(/* initialize with some data */)
+    visualizer.visualizeData(data)
+}
+
+main()

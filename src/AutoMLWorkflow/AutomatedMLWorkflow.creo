@@ -1,0 +1,41 @@
+// Using CreoLang modules for automated machine learning
+Use MachineLearning from CreoLang.ML;
+Use DataPreparation from CreoLang.DataPrep;
+Use ModelEvaluation from CreoLang.ModelEval;
+Use Deployment from CreoLang.Deployment;
+
+// Automated Machine Learning Class
+class AutomatedMLWorkflow {
+    mlEngine: MachineLearning
+    dataPrep: DataPreparation
+    modelEval: ModelEvaluation
+    deployment: Deployment
+
+    constructor() {
+        this.mlEngine = new MachineLearning()
+        this.dataPrep = new DataPreparation()
+        this.modelEval = new ModelEvaluation()
+        this.deployment = new Deployment()
+    }
+
+    func runWorkflow(dataSet: DataSet) {
+        let preparedData = this.dataPrep.prepare(dataSet)
+        let model = this.mlEngine.train(preparedData)
+        let evaluation = this.modelEval.evaluate(model, preparedData)
+        if evaluation.isSuccessful() {
+            this.deployment.deploy(model)
+            print("Model deployed successfully!")
+        } else {
+            print("Model evaluation failed. Re-training required.")
+        }
+    }
+}
+
+// Example usage of AutomatedMLWorkflow
+func main() {
+    let workflow = new AutomatedMLWorkflow()
+    let data = DataSet(/* initialize with some data */)
+    workflow.runWorkflow(data)
+}
+
+main()

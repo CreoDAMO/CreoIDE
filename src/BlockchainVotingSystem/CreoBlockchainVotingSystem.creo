@@ -1,0 +1,48 @@
+// Using CreoLang modules for blockchain-based voting system
+Use Blockchain from CreoLang.Blockchain;
+Use Voting from CreoLang.Voting;
+Use Security from CreoLang.Security;
+Use UserInterface from CreoLang.UI;
+
+// Creo Blockchain Voting System Class
+class CreoBlockchainVotingSystem {
+    blockchain: Blockchain
+    voting: Voting
+    security: Security
+    ui: UserInterface
+
+    constructor() {
+        this.blockchain = new Blockchain()
+        this.voting = new Voting()
+        this.security = new Security()
+        this.ui = new UserInterface()
+    }
+
+    func initializeElection(electionDetails: ElectionDetails) {
+        this.blockchain.createElection(electionDetails)
+    }
+
+    func castVote(vote: Vote) {
+        let secureVote = this.security.encrypt(vote)
+        this.blockchain.recordVote(secureVote)
+    }
+
+    func displayResults() {
+        let results = this.blockchain.getResults()
+        this.ui.display(results)
+    }
+}
+
+// Example usage of BlockchainVotingSystem
+func main() {
+    let votingSystem = new BlockchainVotingSystem()
+    let election = ElectionDetails(/* initialize with election details */)
+    votingSystem.initializeElection(election)
+
+    let vote = Vote(/* initialize with vote details */)
+    votingSystem.castVote(vote)
+
+    votingSystem.displayResults()
+}
+
+main()
