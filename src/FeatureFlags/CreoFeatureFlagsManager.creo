@@ -1,4 +1,4 @@
-// FeatureFlagsManager.creo
+// CreoFeatureFlagsManager.creo
 // Using CreoLang modules and tools for Feature Flags Management System
 Use CreoLang.Core.Interpreter
 Use CreoLang.Modules.Logging
@@ -13,7 +13,7 @@ Use CreoLang.Modules.MultiProcessing
 Use CreoLang.Modules.UserProfiling
 Use CreoLang.Modules.DynamicTuning
 
-// Enhanced FeatureFlags class with extended capabilities
+// Enhanced CreoFeatureFlags class with extended capabilities
 class FeatureFlags {
     flags: Map<String, Boolean>
     userSpecificFlags: Map<String, Boolean>
