@@ -1,0 +1,62 @@
+// CreoLang Script for Managing the Creator's Trust Deed
+
+class CreatorsTrustDeedManager {
+    trustDeed: Document
+
+    constructor() {
+        this.trustDeed = new Document("Creator's Trust Deed", "Path/To/CreatorsTrustDeed.txt")
+    }
+
+    // Function to display the Trust Deed
+    func displayTrustDeed() {
+        print("Displaying the Creator's Trust Deed:")
+        print("------------------------------------------------")
+        print(this.trustDeed.getContent())
+        print("------------------------------------------------")
+    }
+
+    // Function to update the Trust Deed content (if necessary)
+    func updateTrustDeedContent(newContent: String) {
+        this.trustDeed.updateContent(newContent)
+        print("The Creator's Trust Deed has been updated.")
+    }
+}
+
+class Document {
+    name: String
+    filePath: String
+
+    constructor(name: String, filePath: String) {
+        this.name = name
+        this.filePath = filePath
+    }
+
+    func getContent() -> String {
+        // Logic to read and return the content of the document from its file path
+        // Placeholder for reading content
+        return """
+        Document Content for \(this.name)
+
+        - Authored by Jacque Antoine DeGraff
+        - Contact: jacquedegraff@creodamo.com
+        """
+    }
+
+    func updateContent(newContent: String) {
+        // Logic to update the document content
+        // Placeholder for file writing
+    }
+}
+
+// Main function to demonstrate the management of the Creator's Trust Deed
+func main() {
+    let deedManager = CreatorsTrustDeedManager()
+
+    // Display the Trust Deed
+    deedManager.displayTrustDeed()
+
+    // Example of updating the Trust Deed, if supported by CreoLang
+    // deedManager.updateTrustDeedContent("Updated content for the Trust Deed...")
+}
+
+main()

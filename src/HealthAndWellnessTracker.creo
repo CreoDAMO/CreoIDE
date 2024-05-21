@@ -1,0 +1,85 @@
+// Using CreoLang modules for health and wellness tracking
+Use HealthDataCollector from CreoLang.Health;
+Use AIPersonalTrainer from CreoLang.AI;
+Use NutritionPlanner from CreoLang.Nutrition;
+Use SleepAnalyzer from CreoLang.Sleep;
+Use MentalHealthMonitor from CreoLang.MentalHealth;
+Use FitnessTracker from CreoLang.Fitness;
+Use WellnessDashboard from CreoLang.Dashboard;
+
+// AI-Powered HealthAndWellnessTracker class
+class HealthAndWellnessTracker {
+    healthDataCollector: HealthDataCollector
+    personalTrainer: AIPersonalTrainer
+    nutritionPlanner: NutritionPlanner
+    sleepAnalyzer: SleepAnalyzer
+    mentalHealthMonitor: MentalHealthMonitor
+    fitnessTracker: FitnessTracker
+    wellnessDashboard: WellnessDashboard
+
+    constructor() {
+        this.healthDataCollector = new HealthDataCollector()
+        this.personalTrainer = new AIPersonalTrainer()
+        this.nutritionPlanner = new NutritionPlanner()
+        this.sleepAnalyzer = new SleepAnalyzer()
+        this.mentalHealthMonitor = new MentalHealthMonitor()
+        this.fitnessTracker = new FitnessTracker()
+        this.wellnessDashboard = new WellnessDashboard()
+    }
+
+    // Method to collect health data
+    func collectHealthData() {
+        this.healthDataCollector.collectData()
+        Console.log("Health data collected.")
+    }
+
+    // Method to generate personalized training plan
+    func generateTrainingPlan() {
+        let trainingPlan = this.personalTrainer.createTrainingPlan()
+        Console.log("Personalized training plan generated:", trainingPlan)
+    }
+
+    // Method to plan nutrition
+    func planNutrition() {
+        let nutritionPlan = this.nutritionPlanner.createPlan()
+        Console.log("Nutrition plan created:", nutritionPlan)
+    }
+
+    // Method to analyze sleep patterns
+    func analyzeSleep() {
+        let sleepReport = this.sleepAnalyzer.analyze()
+        Console.log("Sleep analysis report:", sleepReport)
+    }
+
+    // Method to monitor mental health
+    func monitorMentalHealth() {
+        let mentalHealthReport = this.mentalHealthMonitor.monitor()
+        Console.log("Mental health status:", mentalHealthReport)
+    }
+
+    // Method to track fitness activities
+    func trackFitness() {
+        this.fitnessTracker.trackActivities()
+        Console.log("Fitness activities tracked.")
+    }
+
+    // Method to display wellness dashboard
+    func displayWellnessDashboard() {
+        let dashboardReport = this.wellnessDashboard.generateReport()
+        Console.log("Wellness dashboard report:", dashboardReport)
+    }
+}
+
+// Main function to demonstrate the HealthAndWellnessTracker
+func main() {
+    let tracker = new HealthAndWellnessTracker()
+    tracker.collectHealthData()
+    tracker.generateTrainingPlan()
+    tracker.planNutrition()
+    tracker.analyzeSleep()
+    tracker.monitorMentalHealth()
+    tracker.trackFitness()
+    tracker.displayWellnessDashboard()
+}
+
+main()

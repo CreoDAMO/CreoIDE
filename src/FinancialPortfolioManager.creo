@@ -1,0 +1,85 @@
+// Using CreoLang modules for financial portfolio management
+Use InvestmentManager from CreoLang.Finance;
+Use PortfolioAnalyzer from CreoLang.Analytics;
+Use RiskAssessment from CreoLang.Risk;
+Use MarketTrends from CreoLang.Market;
+Use TaxCalculator from CreoLang.Tax;
+Use NotificationService from CreoLang.Notifications;
+Use ReportGenerator from CreoLang.Reports;
+
+// FinancialPortfolioManager class
+class FinancialPortfolioManager {
+    investmentManager: InvestmentManager
+    portfolioAnalyzer: PortfolioAnalyzer
+    riskAssessment: RiskAssessment
+    marketTrends: MarketTrends
+    taxCalculator: TaxCalculator
+    notificationService: NotificationService
+    reportGenerator: ReportGenerator
+
+    constructor() {
+        this.investmentManager = new InvestmentManager()
+        this.portfolioAnalyzer = new PortfolioAnalyzer()
+        this.riskAssessment = new RiskAssessment()
+        this.marketTrends = new MarketTrends()
+        this.taxCalculator = new TaxCalculator()
+        this.notificationService = new NotificationService()
+        this.reportGenerator = new ReportGenerator()
+    }
+
+    // Method to manage investments
+    func manageInvestments() {
+        this.investmentManager.manage()
+        Console.log("Investments managed.")
+    }
+
+    // Method to analyze portfolio performance
+    func analyzePortfolio() {
+        let analysisReport = this.portfolioAnalyzer.analyze()
+        Console.log("Portfolio analysis report:", analysisReport)
+    }
+
+    // Method to assess investment risks
+    func assessRisks() {
+        let riskReport = this.riskAssessment.assess()
+        Console.log("Investment risk report:", riskReport)
+    }
+
+    // Method to track market trends
+    func trackMarketTrends() {
+        let trendsReport = this.marketTrends.track()
+        Console.log("Market trends report:", trendsReport)
+    }
+
+    // Method to calculate taxes on investments
+    func calculateTaxes() {
+        let taxReport = this.taxCalculator.calculate()
+        Console.log("Tax report:", taxReport)
+    }
+
+    // Method to send notifications
+    func sendNotifications() {
+        this.notificationService.send()
+        Console.log("Notifications sent.")
+    }
+
+    // Method to generate financial reports
+    func generateReports() {
+        let report = this.reportGenerator.generate()
+        Console.log("Financial report generated:", report)
+    }
+}
+
+// Main function to demonstrate the FinancialPortfolioManager
+func main() {
+    let portfolioManager = new FinancialPortfolioManager()
+    portfolioManager.manageInvestments()
+    portfolioManager.analyzePortfolio()
+    portfolioManager.assessRisks()
+    portfolioManager.trackMarketTrends()
+    portfolioManager.calculateTaxes()
+    portfolioManager.sendNotifications()
+    portfolioManager.generateReports()
+}
+
+main()

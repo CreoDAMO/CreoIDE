@@ -1,0 +1,58 @@
+// Using CreoLang's logging and configuration modules
+Use CreoLang.Logging.Logger;
+Use CreoLang.Configuration.Config;
+Use CreoLang.Validation.ConfigValidator;
+
+// Logger class in CreoLang for application logging
+class CreoLogger {
+    logger: Logger;
+
+    construct() {
+        // Setting up the CreoLang Logger
+        this.logger = new Logger('CreoDAMO');
+    }
+
+    func info(message: String) {
+        // Logging an information message
+        this.logger.logInfo(message);
+    }
+
+    func error(message: String) {
+        // Logging an error message
+        this.logger.logError(message);
+    }
+}
+
+// ConfigValidator class in CreoLang for configuration validation
+class CreoConfigValidator {
+    config: Config;
+    schema: String;
+
+    construct() {
+        // Initializing the configuration
+        this.config = new Config('app_config.ini');
+        this.schema = this.config.getSetting('CONFIG_SCHEMA');
+    }
+
+    func validate(configData: String) -> Boolean {
+        // Validating the config data against the schema
+        return ConfigValidator.validate(configData, this.schema);
+    }
+}
+
+// Example usage of CreoLogger and CreoConfigValidator
+func main() {
+    let logger = new CreoLogger();
+    logger.info("Starting CreoDAMO Application");
+
+    let validator = new CreoConfigValidator();
+    let isValid = validator.validate("user_config_data");
+    if (isValid) {
+        logger.info("Configuration validated successfully");
+    } else {
+        logger.error("Configuration validation failed");
+    }
+}
+
+// Execute the main function
+main();

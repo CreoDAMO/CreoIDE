@@ -1,0 +1,129 @@
+// AdvancedWorkforceManagementSystem.creo
+// CreoLang Script for Advanced Creo Workforce Management System
+
+// Using modules for employee management, task scheduling, and HR functionalities
+Use EmployeeManagement from CreoLang.Employee;
+Use TaskScheduling from CreoLang.Scheduling;
+Use HRFunctions from CreoLang.HR;
+Use AnalyticsEngine from CreoLang.Analytics;
+Use CommunicationPortal from CreoLang.Communication;
+Use PerformanceAssessment from CreoLang.Performance;
+Use LeaveManagement from CreoLang.Leave;
+
+// Define the AdvancedWorkforceManagementSystem class
+class AdvancedWorkforceManagementSystem {
+    employeeManager: EmployeeManagement
+    taskScheduler: TaskScheduling
+    hrCenter: HRFunctions
+    analytics: AnalyticsEngine
+    communicationPortal: CommunicationPortal
+    performanceAssessment: PerformanceAssessment
+    leaveManager: LeaveManagement
+
+    constructor() {
+        this.employeeManager = new EmployeeManagement()
+        this.taskScheduler = new TaskScheduling()
+        this.hrCenter = new HRFunctions()
+        this.analytics = new AnalyticsEngine()
+        this.communicationPortal = new CommunicationPortal()
+        this.performanceAssessment = new PerformanceAssessment()
+        this.leaveManager = new LeaveManagement()
+    }
+
+    // Advanced methods for managing employees, tasks, and HR-related activities
+    func manageEmployeeDetails(employeeId: String, details: EmployeeDetails) {
+        this.employeeManager.updateDetails(employeeId, details)
+    }
+
+    func scheduleEmployeeTasks(employeeId: String, tasks: List[Task]) {
+        this.taskScheduler.assignTasks(employeeId, tasks)
+    }
+
+    func handleLeaveRequests(leaveRequest: LeaveRequest) {
+        this.leaveManager.processRequest(leaveRequest)
+    }
+
+    func assessEmployeePerformance(employeeId: String) {
+        this.performanceAssessment.conductReview(employeeId)
+    }
+
+    func analyzeWorkforceData() -> AnalysisReport {
+        return this.analytics.generateReport()
+    }
+
+    // Additional advanced functionalities...
+}
+
+// Data structures for Employees, Tasks, Shifts, etc., with enhanced fields
+struct Employee {
+    id: String
+    name: String
+    position: String
+    team: String
+    // Other relevant fields
+}
+
+struct EmployeeDetails {
+    address: String
+    contactInfo: ContactInfo
+    qualifications: List[String]
+    // Additional employee details
+}
+
+struct Task {
+    taskId: String
+    description: String
+    deadline: Date
+    priorityLevel: String
+    // Other task properties
+}
+
+struct LeaveRequest {
+    employeeId: String
+    startDate: Date
+    endDate: Date
+    reason: String
+    type: String
+    // Other leave request details
+}
+
+struct ContactInfo {
+    phone: String
+    email: String
+    // Other contact details
+}
+
+struct AnalysisReport {
+    summary: String
+    detailedMetrics: Dict[String, Any]
+    // Other report fields
+}
+
+// Main function to initialize and demonstrate the Advanced Workforce Management System
+func main() {
+    let advancedWorkforceSystem = new AdvancedWorkforceManagementSystem()
+
+    // Perform advanced employee and task management, HR requests, and analytics
+    advancedWorkforceSystem.manageEmployeeDetails("emp456", EmployeeDetails(
+        address: "123 Main St",
+        contactInfo: ContactInfo(phone: "123-456-7890", email: "emp456@example.com"),
+        qualifications: ["Bachelor's Degree", "Certified Project Manager"]
+    ))
+    advancedWorkforceSystem.scheduleEmployeeTasks("emp456", [
+        Task(taskId: "task789", description: "Complete project report", deadline: new Date("2024-06-30"), priorityLevel: "High")
+    ])
+    advancedWorkforceSystem.handleLeaveRequests(LeaveRequest(
+        employeeId: "emp456",
+        startDate: new Date("2024-07-01"),
+        endDate: new Date("2024-07-15"),
+        reason: "Vacation",
+        type: "Paid Leave"
+    ))
+    advancedWorkforceSystem.assessEmployeePerformance("emp456")
+    let workforceAnalysis = advancedWorkforceSystem.analyzeWorkforceData()
+
+    // Display or utilize the workforce analysis report
+    Console.log("Workforce Analysis Report: \(workforceAnalysis.summary)")
+}
+
+main()

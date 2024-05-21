@@ -1,0 +1,118 @@
+// CreoQuickPay.creo
+// Creo Quick Pay Script for Transactional Funding in E-commerce
+
+// Importing necessary modules for operation
+Use PaymentGatewayIntegration from Creo.Finance.PaymentGateways;
+Use ECommercePlatformAPI from Creo.ECommerce.Integration;
+Use RiskAssessmentEngine from Creo.Finance.RiskManagement;
+Use TransactionalFundingService from Creo.Finance.TransactionalFunding;
+Use NotificationService from Creo.Communication.Notifications;
+
+// Creo Quick Pay Main Class
+class CreoQuickPay {
+    paymentGateway: PaymentGatewayIntegration
+    eCommerceAPI: ECommercePlatformAPI
+    riskAssessment: RiskAssessmentEngine
+    fundingService: TransactionalFundingService
+    notificationService: NotificationService
+
+    // Constructor to initialize integration services
+    constructor() {
+        this.paymentGateway = new PaymentGatewayIntegration(["Stripe", "PayPal"])
+        this.eCommerceAPI = new ECommercePlatformAPI(["Shopify", "Amazon", "Walmart"])
+        this.riskAssessment = new RiskAssessmentEngine()
+        this.fundingService = new TransactionalFundingService()
+        this.notificationService = new NotificationService()
+    }
+
+    // Function to process funding request
+    func processFundingRequest(sellerId: String, amount: Float, platform: String) {
+        // Verify seller and platform
+        let sellerVerified = this.eCommerceAPI.verifySeller(sellerId, platform)
+        if not sellerVerified {
+            Console.log("Seller verification failed.")
+            return
+        }
+
+        // Assess risk
+        let riskScore = this.riskAssessment.assessSeller(sellerId, amount)
+        let threshold = 5 // Assuming a risk score threshold for demonstration
+        if riskScore > threshold {
+            Console.log("Risk assessment failed.")
+            return
+        }
+
+        // Initiate funding
+        let fundingApproved = this.fundingService.approveFunding(sellerId, amount)
+        if fundingApproved {
+            Console.log("Funding approved for Seller ID: \(sellerId)")
+            this.paymentGateway.disburseFunds(sellerId, amount)
+            this.notificationService.sendNotification(sellerId, "Funding Approved", "Your funding request for \(amount) has been approved.")
+        } else {
+            Console.log("Funding approval failed.")
+        }
+    }
+
+    // Function to handle repayment
+    func processRepayment(sellerId: String, amount: Float) {
+        this.paymentGateway.processRepayment(sellerId, amount)
+        this.fundingService.recordRepayment(sellerId, amount)
+        Console.log("Repayment processed for Seller ID: \(sellerId)")
+        this.notificationService.sendNotification(sellerId, "Repayment Processed", "Your repayment of \(amount) has been processed successfully.")
+    }
+}
+
+// E-commerce Platform API Mockup
+module ECommercePlatformAPI {
+    func verifySeller(sellerId: String, platform: String) -> Bool {
+        // Mockup verification logic
+        return true // Assuming seller is verified for demonstration
+    }
+}
+
+// Payment Gateway Integration Mockup
+module PaymentGatewayIntegration {
+    func disburseFunds(sellerId: String, amount: Float) {
+        // Mockup disbursement logic
+    }
+
+    func processRepayment(sellerId: String, amount: Float) {
+        // Mockup repayment processing logic
+    }
+}
+
+// Risk Assessment Engine Mockup
+module RiskAssessmentEngine {
+    func assessSeller(sellerId: String, amount: Float) -> Int {
+        // Mockup risk assessment logic
+        return 0 // Assuming low risk for demonstration
+    }
+}
+
+// Transactional Funding Service Mockup
+module TransactionalFundingService {
+    func approveFunding(sellerId: String, amount: Float) -> Bool {
+        // Mockup funding approval logic
+        return true // Assuming funding is approved for demonstration
+    }
+
+    func recordRepayment(sellerId: String, amount: Float) {
+        // Mockup repayment recording logic
+    }
+}
+
+// Notification Service Mockup
+module NotificationService {
+    func sendNotification(recipientId: String, title: String, message: String) {
+        // Mockup notification sending logic
+    }
+}
+
+// Main Execution for Demonstration
+func main() {
+    let creoQuickPay = new CreoQuickPay()
+    creoQuickPay.processFundingRequest("seller123", 10000.00, "Shopify")
+    creoQuickPay.processRepayment("seller123", 10000.00)
+}
+
+main()
