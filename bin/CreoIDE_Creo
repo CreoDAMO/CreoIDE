@@ -1,0 +1,3 @@
+#!/bin/bash
+# Mock compiled output
+cat src/main.creo

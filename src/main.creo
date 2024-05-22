@@ -1,0 +1,11 @@
+// main.creo
+class Main {
+    func main() {
+        print("Hello, CreoLang!")
+    }
+}
+
+func main() {
+    let app = Main()
+    app.main()
+}

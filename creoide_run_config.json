@@ -29,6 +29,35 @@
           "problemMatcher": []
         }
       ]
+    },
+    {
+      "name": "Run C Project",
+      "type": "c",
+      "request": "launch",
+      "mainFile": "src/main.c",
+      "args": [],
+      "env": {
+        "NODE_ENV": "development",
+        "PYTHONPATH": "/usr/local/lib/python3.8/site-packages"
+      },
+      "build": {
+        "preBuild": ["npm install", "pip install -r requirements.txt"],
+        "postBuild": ["echo Build completed"]
+      },
+      "tasks": [
+        {
+          "label": "Compile C Code",
+          "type": "shell",
+          "command": "gcc src/main.c -o build/main",
+          "problemMatcher": ["$gcc"]
+        },
+        {
+          "label": "Run C Executable",
+          "type": "shell",
+          "command": "build/main",
+          "problemMatcher": []
+        }
+      ]
     }
   ]
 }
