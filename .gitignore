@@ -1,0 +1,1 @@
+*.o\n*.obj\n*.exe\n*.dll\n*.so\n*.dylib\n*.out\n*.class\n*.jar\n*.war\n*.lib\n*.a\n*.app\n/debug\n/release\n.vscode/\n.idea/\n*.swp\n*.swo\n*~\n*.log\n/node_modules\n/build\n/dist\n/target\n.DS_Store\nThumbs.db\nbin/\nobj/\n*.creo~\n*.tmp\n__pycache__/\n*.pyc\n*.pyo
