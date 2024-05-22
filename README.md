@@ -67,14 +67,31 @@ To use Creo IDE, ensure the following prerequisites are installed on your system
 
 ### Build and Run the Project
 
-1. **Build the Project**:
-   ```sh
-   make all
-   ```
-2. **Run the Project**:
-   ```sh
-   make run
-   ```
+
+1. **Makefile Setup:**
+   - Configured the `Makefile` to handle both C and CreoLang projects.
+   - Used the `creo-compiler.sh` script to compile CreoLang files.
+
+2. **Compilation and Execution:**
+   - Cleaned the project directory using `make clean`.
+   - Ensured the `bin` directory was created.
+   - Compiled both the C and CreoLang files using `make all`.
+   - Successfully ran both executables:
+     - C executable with `make run_c`.
+     - CreoLang executable with `make run_creo`.
+
+### Commands Used
+```sh
+chmod +x scripts/creo-compiler.sh
+make clean
+mkdir -p bin
+make all
+make run_c
+make run_creo
+```
+
+### Next Steps
+With this setup, you can now proceed with developing and integrating more features into your CreoIDE project. If you need to add more scripts, compile additional languages, or include more functionality, you can update the `Makefile` and scripts accordingly. 
 
 ## Project Structure
 
