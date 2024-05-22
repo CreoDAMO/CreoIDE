@@ -1,0 +1,35 @@
+# Dependabot configuration file
+# For more information on configuration options, see:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "npm" # For JavaScript/Node.js projects
+    directory: "/" # Location of package manifests (e.g., package.json)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+
+  - package-ecosystem: "pip" # For Python projects
+    directory: "/" # Location of package manifests (e.g., requirements.txt)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+
+  - package-ecosystem: "maven" # For Java projects
+    directory: "/" # Location of package manifests (e.g., pom.xml)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+
+  - package-ecosystem: "cargo" # For Rust projects
+    directory: "/" # Location of package manifests (e.g., Cargo.toml)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+
+  - package-ecosystem: "github-actions" # For GitHub Actions
+    directory: "/" # Location of workflow files (e.g., .github/workflows)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+
+  - package-ecosystem: "docker" # For Docker projects
+    directory: "/" # Location of Dockerfiles
+    schedule:
+      interval: "weekly" # Check for updates weekly
