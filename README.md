@@ -67,7 +67,6 @@ To use Creo IDE, ensure the following prerequisites are installed on your system
 
 ### Build and Run the Project
 
-
 1. **Makefile Setup:**
    - Configured the `Makefile` to handle both C and CreoLang projects.
    - Used the `creo-compiler.sh` script to compile CreoLang files.
@@ -91,7 +90,7 @@ make run_creo
 ```
 
 ### Next Steps
-With this setup, you can now proceed with developing and integrating more features into your CreoIDE project. If you need to add more scripts, compile additional languages, or include more functionality, you can update the `Makefile` and scripts accordingly. 
+With this setup, you can now proceed with developing and integrating more features into your CreoIDE project. If you need to add more scripts, compile additional languages, or include more functionality, you can update the `Makefile` and scripts accordingly.
 
 ## Project Structure
 
