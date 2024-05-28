@@ -1,12 +1,47 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "markdownlint",
-			"problemMatcher": [
-				"$markdownlint"
-			],
-			"label": "markdownlint: Lint all Markdown files in the workspace with markdownlint"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build All",
+      "type": "shell",
+      "command": "make",
+      "args": ["all"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "make",
+      "args": ["clean"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Run C",
+      "type": "shell",
+      "command": "make",
+      "args": ["run_c"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run Creo",
+      "type": "shell",
+      "command": "make",
+      "args": ["run_creo"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
 }
