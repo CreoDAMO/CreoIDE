@@ -1,5 +1,7 @@
 # Creo IDE - Integrated Development Environment for CreoLang
 
+![CreoDAMO - A logo for CreoIDE, emphasizing its role as an integrated development environment for CreoLang  The logo should include elements that](https://github.com/CreoDAMO/CreoIDE/assets/151800081/bf54f606-9481-4694-9ccb-7e25d9239681)
+
 ## Overview
 
 Creo IDE is the official development environment for CreoLang, designed to fully leverage its innovative features. It offers a seamless experience for developers working in web and mobile development, blockchain, smart contracts, machine learning, data analysis, quantum computing, and AR/VR/XR/MR development.
@@ -91,6 +93,9 @@ make run_creo
 
 ### Next Steps
 With this setup, you can now proceed with developing and integrating more features into your CreoIDE project. If you need to add more scripts, compile additional languages, or include more functionality, you can update the `Makefile` and scripts accordingly.
+
+![CreoDAMO - A logo for CreoLang, showcasing a futuristic and innovative vibe  The logo should incorporate elements related to progra](https://github.com/CreoDAMO/CreoIDE/assets/151800081/088b8ed7-f96c-4e00-9fc6-02b5e1a53eeb)
+
 
 ## Project Structure
 
